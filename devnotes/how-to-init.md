@@ -33,7 +33,7 @@ But there's 2 pros and 1 con to creating a local dev environment alongside a dev
 ## Init Steps for a Git-versioned Dockerised Python Program
 1. Create the base folder structure. So an `app/main.py`, `tests/`, `samples/log.txt` (empty folders/files don't get committed)
 2. Create a python venv (for local dev environment) `python -m venv .venv`
-3. `pip install uv && uv init` will create `pyproject.toml` and `.python-version`. `uv` will take the main Python packages for our app, listed in `pyproject.toml`, and turn it into a `requirements.txt`, which pins down the version of all Python packages, including package dependencies. `uv` can also handle generating and modifying `pyproject.toml`
+3. `pip install uv && uv init` will create `pyproject.toml` and `.python-version`. `uv` will take the main Python packages for our app, listed in `pyproject.toml`, and turn it into a `requirements.txt`, which pins down the version of Python, all the Python packages and all package dependencies. `uv` can also handle generating, modifying `pyproject.toml`, `.venv`, and running Python. It's all in one solution
 4. Run `docker init` - this is a smart way to generate the init Docker boilerplate
 5. Verify `docker compose build && docker compose run --rm app python app.main samples/test.log`
 6. Download the official GitHub Python .gitignore template `curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore`

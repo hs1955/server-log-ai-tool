@@ -329,22 +329,22 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "huggingface-hub" },
-    { name = "pre-commit" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "pre-commit" },
     { name = "pytest" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "huggingface-hub", specifier = "==2.4.0" },
-    { name = "pre-commit", specifier = "==4.7.0" },
-]
+requires-dist = [{ name = "huggingface-hub", specifier = "==2.4.0" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=9.2.0" }]
+dev = [
+    { name = "pre-commit", specifier = ">=4.7.0" },
+    { name = "pytest", specifier = ">=9.2.0" },
+]
 
 [[package]]
 name = "tqdm"
