@@ -64,9 +64,9 @@ There's a lot of initial files and it looks like spaghetti, but break it down by
 - Git: `.git`, `.gitignore`
 - Pre-commit Git Hook: `.pre-commit-config.yaml`
 - Local Python Env: `.venv`, `.env`
-- Local/Dev/Production Python Envs: `requirements.txt`, `requirements.in`, `requirements-dev.txt`, `requirements-dev.in`
+- Local/Dev/Production Python Envs: `pyproject.toml`, `uv.lock`
 - Docker:
   - `Dockerfile` - How to build the app image
   - `compose.yaml` - How to orchestrate all the containers/services together
   - `.dockerignore` - Files not to be copied into your container
-- Make: `Makefile` - String sequence of commands commonly used together (often, but not always for building)
+- Make: `Makefile` - String sequence of commands commonly used together (often, but not always, for building)

@@ -31,8 +31,14 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 COPY pyproject.toml uv.lock ./
 
 # Install all dependencies, including the dev group
+# --no-install-project: Skip building and installing your
+# server-log-ai-tool package, and to only install its declared dependencies (like huggingface-hub)
+# The alternative is no flag and telling `uv` in `pyproject.toml` where app lives,
+# but we use COPY . . to get the app, and app has code that will change often,
+# while dependency package code won't change much, making good use of Docker images
+# layer by layer caching
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked
+    uv sync --locked --no-install-project
 
 # Copy the rest of the application source
 COPY . .
