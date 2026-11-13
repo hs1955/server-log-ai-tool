@@ -1,7 +1,7 @@
 # How to Init a Properly Versioned Dockerised Python Project
 Sure we can just start coding, but quickly you may run into git issues committing wrong items, or tool versions changing.
 
-It's true that Docker is overkill for this project, especially at the beginning: Python pyproject.toml can handle versioning Python and its packages. But I am using it to learn about Docker.
+It's true that Docker is overkill for this project, especially at the beginning: Python `pyproject.toml` can handle versioning Python and its packages. But I am using it to learn about Docker.
 
 Docker pays off when several different programs need to be orchestrated together (and all of their versioning needs to be in one place). So it's still ok to use here.
 
@@ -26,14 +26,14 @@ But there's 2 pros and 1 con to creating a local dev environment alongside a dev
 3. There's still value in a devcontainer, e.g. for adding a database container in docker compose. You'll just interact with its API and never see its code.
 #### Cons
 1. You must maintain the local dev environment to practically mirror the dev container, which can be difficult across Windows and Linux - making this a source of inconsistencies
-   - For a project like this, a single `requirements.txt` synchronizes both easily.
-   - pip tools' `pip-sync requirements.txt` will ensure your pyvenv perfectly matches the `requirements.txt` lockfile, even uninstalling additional packages.
+   - For a project like this, a single `requirements.txt` synchronizes both (easily).
+   - `uv sync requirements.txt` will ensure your pyvenv perfectly matches the `requirements.txt` lockfile, even uninstalling additional packages.
 
 
 ## Init Steps for a Git-versioned Dockerised Python Program
 1. Create the base folder structure. So an `app/main.py`, `tests/`, `samples/log.txt` (empty folders/files don't get committed)
 2. Create a python venv (for local dev environment) `python -m venv .venv`
-3. Create the `requirements.txt` for python: `pip freeze > requirements.txt`
+3. `pip install uv && uv init` will create `pyproject.toml` and `.python-version`. `uv` will take the main Python packages for our app, listed in `pyproject.toml`, and turn it into a `requirements.txt`, which pins down the version of all Python packages, including package dependencies. `uv` can also handle generating and modifying `pyproject.toml`
 4. Run `docker init` - this is a smart way to generate the init Docker boilerplate
 5. Verify `docker compose build && docker compose run --rm app python app.main samples/test.log`
 6. Download the official GitHub Python .gitignore template `curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore`

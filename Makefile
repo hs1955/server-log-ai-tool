@@ -1,9 +1,8 @@
 .PHONY: requirements run test shell build clean help # State that these are commands, not files
 
-requirements:  ## Recompile locks, sync venv, rebuild container
-	pip-compile requirements.in
-	pip-compile requirements-dev.in
-	pip-sync requirements.txt requirements-dev.txt
+requirements:  ## Recompile locks, sync venv by adding & removing packages, rebuild container
+	uv lock
+	uv sync
 	docker compose build
 
 run:  ## Run the analyzer: make run ARGS="samples/test.log"
